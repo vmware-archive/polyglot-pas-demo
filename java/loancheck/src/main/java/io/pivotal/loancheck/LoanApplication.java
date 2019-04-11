@@ -1,6 +1,7 @@
-package io.pivotal.fakeapply;
+package io.pivotal.loancheck;
 
 
+import java.util.Objects;
 
 public class LoanApplication {
 
@@ -35,5 +36,20 @@ public class LoanApplication {
             ", name='" + name + '\'' +
             ", amount=" + amount +
             '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    LoanApplication that = (LoanApplication) o;
+    return amount == that.amount &&
+            uuid.equals(that.uuid) &&
+            Objects.equals(name, that.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(uuid, name, amount);
   }
 }

@@ -1,4 +1,4 @@
-package io.pivotal.fakeapply;
+package io.pivotal.loancheck;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FakeapplyApplicationTests {
+public class LoancheckApplicationTests {
 
 	@Test
 	public void contextLoads() {
