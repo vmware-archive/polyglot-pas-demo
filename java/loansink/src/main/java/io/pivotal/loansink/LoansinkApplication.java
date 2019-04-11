@@ -33,7 +33,7 @@ public class LoansinkApplication {
 
 		private final MessageChannel applicationsOut;
 
-		private List<String> names = Arrays.asList("Donald", "Theresa", "Vladimir", "Angela");
+		private List<String> names = Arrays.asList("Donald", "Theresa", "Vladimir", "Angela", "Emmanuel", "Shinzō", "Jacinda", "Kim");
 		private List<Long> amounts = Arrays.asList(1000L, 10000L, 100000L, 1000000L, 10000000L, 100000000L, 100000000L);
 
 		public TimerSource(ApplicationsBinding binding) {

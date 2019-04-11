@@ -11,11 +11,15 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 @EnableBinding(ApplicationsBinding.class)
 public class LoancheckApplication {
 
 	public static final Logger LOG = LoggerFactory.getLogger(LoancheckApplication.class);
+	public static final List<LoanApplication> applications = new ArrayList<>();
 
 	public static void main(String[] args) {
 		SpringApplication.run(LoancheckApplication.class, args);
@@ -38,7 +42,7 @@ public class LoancheckApplication {
 		public void process(LoanApplication application) {
 			LOG.info("Application {} for ${} for {}", application.getUuid(), application.getAmount(), application.getName());
 
-			if(application.getName().equalsIgnoreCase("Donald")){
+			if(application.getName().equalsIgnoreCase("Kim")){
 				decliner.decline(application);
 			} else {
 				approver.approve(application);
@@ -51,7 +55,8 @@ public class LoancheckApplication {
 
 		@SendTo(ApplicationsBinding.APPROVED_OUT)
 		public LoanApplication approve(LoanApplication application){
-			LOG.info("Approved {} for ${} for {}", application.getUuid(), application.getAmount(), application.getName());
+			application.setStatus(Statuses.APPROVED.name());
+			LOG.info("{} {} for ${} for {}", application.getStatus(), application.getUuid(), application.getAmount(), application.getName());
 			return application;
 		}
 	}
@@ -61,7 +66,8 @@ public class LoancheckApplication {
 
 		@SendTo(ApplicationsBinding.DECLINED_OUT)
 		public LoanApplication decline(LoanApplication application){
-			LOG.info("Declined {} for ${} for {}", application.getUuid(), application.getAmount(), application.getName());
+			application.setStatus(Statuses.DECLINED.name());
+			LOG.info("{} {} for ${} for {}", application.getStatus(), application.getUuid(), application.getAmount(), application.getName());
 			return application;
 		}
 	}
