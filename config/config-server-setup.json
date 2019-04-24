@@ -1,0 +1,6 @@
+{
+  "git": {
+    "uri": "https://github.com/pivotal/polyglot-pas-demo.git",
+    "searchPaths": "config/{application}"
+  }
+}
