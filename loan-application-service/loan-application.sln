@@ -32,8 +32,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{A4D3
 		scripts\cf-services.ps1 = scripts\cf-services.ps1
 		scripts\createClient.ps1 = scripts\createClient.ps1
 		scripts\local-dev.ps1 = scripts\local-dev.ps1
-		scripts\prod-config-server.json = scripts\prod-config-server.json
-		scripts\test-config-server.json = scripts\test-config-server.json
 	EndProjectSection
 EndProject
 Global
