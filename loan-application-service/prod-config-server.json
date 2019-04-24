@@ -1,0 +1,6 @@
+{
+	"git": {
+		"uri": "https://github.com/benwilcock/polyglot-pas-demo.git",
+		"searchPaths": "config/prod/{application}"
+	}
+}

@@ -1,0 +1,20 @@
+﻿---
+applications:
+- name: loan-application
+  host: loans
+  instances: 1
+  memory: 512M
+  disk_quota: 512M
+  buildpack: binary_buildpack
+  stack: windows2016
+  command: "cmd /c LoanApplication"
+  env:
+    PROJECT_GUID: 113a7792-5729-4b3b-8823-dfaad8e94bfe
+    PROJECT_NAME: 'loan-application'
+    ASPNETCORE_ENVIRONMENT: Staging
+  services:
+    - loans-sql
+    - loans-config
+    - loans-discovery
+
+#cf push -f "ci/cf-stage.yml" -p "src/MyCompany.LoanApplication/bin/Debug/net461/publish/"

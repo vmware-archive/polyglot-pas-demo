@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{08A62C3B-0DBE-4FAE-8B2E-3F197FAC92F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{BC1029F2-7334-4B7A-8DE8-792DC5A4D016}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanApplication", "src\MyCompany.LoanApplication\LoanApplication.csproj", "{113A7792-5729-4B3B-8823-DFAAD8E94BFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanApplication.UnitTests", "test\MyCompany.LoanApplication.UnitTests\LoanApplication.UnitTests.csproj", "{54ACA301-0BDB-42B4-B20D-535FF1536B8C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanApplication.IntegrationTests", "test\MyCompany.LoanApplication.IntegrationTests\LoanApplication.IntegrationTests.csproj", "{D4F4C15D-3690-4D97-9320-8ACE462E4B6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoanApplication.SmokeTests", "test\MyCompany.LoanApplication.SmokeTests\LoanApplication.SmokeTests.csproj", "{1B33458D-2380-4A60-8FED-A1AB6A662CA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2F5E8E3B-8394-4264-934C-EB4BCFD096F6}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ci", "Ci", "{AA771AF7-3A41-4A18-BA83-FFD0F64F5E00}"
+	ProjectSection(SolutionItems) = preProject
+		ci\artillery.yml = ci\artillery.yml
+		ci\cf-prod.yml = ci\cf-prod.yml
+		ci\cf-stage.yml = ci\cf-stage.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{A4D3730D-166F-4371-A9CA-9CA7CF1E095F}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\cf-services.ps1 = scripts\cf-services.ps1
+		scripts\createClient.ps1 = scripts\createClient.ps1
+		scripts\local-dev.ps1 = scripts\local-dev.ps1
+		scripts\prod-config-server.json = scripts\prod-config-server.json
+		scripts\test-config-server.json = scripts\test-config-server.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{113A7792-5729-4B3B-8823-DFAAD8E94BFE}.Debug|x64.ActiveCfg = Debug|x64
+		{113A7792-5729-4B3B-8823-DFAAD8E94BFE}.Debug|x64.Build.0 = Debug|x64
+		{113A7792-5729-4B3B-8823-DFAAD8E94BFE}.Release|x64.ActiveCfg = Release|x64
+		{113A7792-5729-4B3B-8823-DFAAD8E94BFE}.Release|x64.Build.0 = Release|x64
+		{54ACA301-0BDB-42B4-B20D-535FF1536B8C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{54ACA301-0BDB-42B4-B20D-535FF1536B8C}.Debug|x64.Build.0 = Debug|Any CPU
+		{54ACA301-0BDB-42B4-B20D-535FF1536B8C}.Release|x64.ActiveCfg = Release|Any CPU
+		{54ACA301-0BDB-42B4-B20D-535FF1536B8C}.Release|x64.Build.0 = Release|Any CPU
+		{D4F4C15D-3690-4D97-9320-8ACE462E4B6F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4F4C15D-3690-4D97-9320-8ACE462E4B6F}.Debug|x64.Build.0 = Debug|Any CPU
+		{D4F4C15D-3690-4D97-9320-8ACE462E4B6F}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4F4C15D-3690-4D97-9320-8ACE462E4B6F}.Release|x64.Build.0 = Release|Any CPU
+		{1B33458D-2380-4A60-8FED-A1AB6A662CA4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B33458D-2380-4A60-8FED-A1AB6A662CA4}.Debug|x64.Build.0 = Debug|Any CPU
+		{1B33458D-2380-4A60-8FED-A1AB6A662CA4}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B33458D-2380-4A60-8FED-A1AB6A662CA4}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{113A7792-5729-4B3B-8823-DFAAD8E94BFE} = {08A62C3B-0DBE-4FAE-8B2E-3F197FAC92F7}
+		{54ACA301-0BDB-42B4-B20D-535FF1536B8C} = {BC1029F2-7334-4B7A-8DE8-792DC5A4D016}
+		{D4F4C15D-3690-4D97-9320-8ACE462E4B6F} = {BC1029F2-7334-4B7A-8DE8-792DC5A4D016}
+		{1B33458D-2380-4A60-8FED-A1AB6A662CA4} = {BC1029F2-7334-4B7A-8DE8-792DC5A4D016}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7E808D4-A26A-46F1-B855-76F456A09140}
+	EndGlobalSection
+EndGlobal
