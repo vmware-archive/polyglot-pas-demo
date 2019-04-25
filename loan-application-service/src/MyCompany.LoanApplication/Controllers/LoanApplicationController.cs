@@ -35,9 +35,9 @@ namespace LoanApplication.Controllers{
 		}
 
 		[HttpGet]
-		public ActionResult<string> Get()
-		{
-			return "Hi There: " + _loanCheckerOptions.CheckApplicationPath;
+		public async Task<ActionResult<string>> Get(){
+			var ret = await _loanCheckerservice.ServiceHealthCheck();
+			return "Hi There. Service status: " + ret;
 		}
 		
 		// GET /5
@@ -63,7 +63,7 @@ namespace LoanApplication.Controllers{
 		//[Authorize(Policy = "add.loans")]
 		public async Task<IActionResult> ApplyForLoan([FromBody] Models.NewLoanApplication loan){
 			try{
-				bool isValid = await _loanCheckerservice.CheckApplicationAsync(loan);
+				bool isValid = await _loanCheckerservice.CheckApprovalAsync(loan);
 			}catch(IOException io){ //http response code != 200
 				_logger.LogError(io,"Error running loan check");
 				return BadRequest();

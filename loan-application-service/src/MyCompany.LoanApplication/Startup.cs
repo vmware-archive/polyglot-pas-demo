@@ -23,6 +23,7 @@ using Steeltoe.Management.Exporter.Tracing;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Common.Http.Discovery;
+using Steeltoe.Management.Endpoint.Refresh;
 
 namespace LoanApplication{
 	public class Startup{
@@ -55,8 +56,9 @@ namespace LoanApplication{
 			
 			var opt = new Services.LoanCheckerOptions() {
 				Address = Configuration["loanApprovalService:address"],
-				CheckApplicationPath = Configuration["loanApprovalService:checkApplicationPath"],
-				Scheme = Configuration["loanApprovalService:scheme"]
+				ApprovalCheckPath = Configuration["loanApprovalService:approvalCheckPath"],
+				Scheme = Configuration["loanApprovalService:scheme"],
+				ServiceHealthPath = Configuration["loanApprovalService:serviceHealthPath"]
 			};
 
 			services.AddHttpClient("loanApplications", c =>{
@@ -68,11 +70,12 @@ namespace LoanApplication{
 			services.AddDiscoveryClient(Configuration);
 
 			services.AddCloudFoundryActuators(Configuration);
-			
+
 			services.AddMetricsActuator(Configuration);
 			services.AddMetricsForwarderExporter(Configuration);
 			services.AddDistributedTracing(Configuration);
 			services.AddZipkinExporter(Configuration);
+			services.AddRefreshActuator(Configuration);
 
 			services.ConfigureCloudFoundryOptions(Configuration);
 			

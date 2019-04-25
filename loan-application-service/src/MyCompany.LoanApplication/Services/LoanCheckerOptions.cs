@@ -7,8 +7,9 @@ namespace LoanApplication.Services
 {
 	public class LoanCheckerOptions
 	{
-		public string Scheme { get; set; } = "http";
+		public string Scheme { get; set; } = "https";
 		public string Address { get; set; }
-		public string CheckApplicationPath { get; set; }
+		public string ApprovalCheckPath { get; set; }
+		public string ServiceHealthPath { get; set; }
 	}
 }

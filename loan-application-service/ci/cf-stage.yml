@@ -1,16 +1,16 @@
 ﻿---
 applications:
-- name: loan-application
+- name: loan-application-service
   host: loans
   instances: 1
   memory: 512M
   disk_quota: 512M
   buildpack: binary_buildpack
   stack: windows2016
-  command: "cmd /c LoanApplication"
+  command: "cmd /c loan-application-service"
   env:
     PROJECT_GUID: 113a7792-5729-4b3b-8823-dfaad8e94bfe
-    PROJECT_NAME: 'loan-application'
+    #PROJECT_NAME: 'loan-application'
     ASPNETCORE_ENVIRONMENT: Staging
   services:
     - loans-sql

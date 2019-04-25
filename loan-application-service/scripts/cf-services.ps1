@@ -12,3 +12,5 @@ cf share-service loans-discovery -o loan-checker -s prod
 
 cf share-service loans-config -o loan-checker -s test
 cf share-service loans-discovery -o loan-checker -s test
+
+cf push zipkin-server -p ~\Downloads\zipkin-server-2.9.4-exec.jar

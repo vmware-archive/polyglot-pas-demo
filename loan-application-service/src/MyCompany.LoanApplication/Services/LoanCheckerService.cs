@@ -10,20 +10,36 @@ namespace LoanApplication.Services
 	public class LoanCheckerService: ILoanCheckerService
 	{
 		private HttpClient _client;
-		private Services.LoanCheckerOptions _loanCheckerOptions;
+		private IOptions<Services.LoanCheckerOptions> _loanCheckerOptions;
 
 		public LoanCheckerService(HttpClient client,
 											IOptions<Services.LoanCheckerOptions> loanCheckerOptions)
 		{
 			_client = client;
+			_loanCheckerOptions = loanCheckerOptions;
 		}
-		public async Task<bool> CheckApplicationAsync(Models.NewLoanApplication loanApp){
+		public async Task<string> ServiceHealthCheck(){
+			HttpResponseMessage resp;
+
+			try{
+				resp = await _client.GetAsync(_loanCheckerOptions.Value.ServiceHealthPath);
+			}catch(Exception){
+				throw;
+			}
+
+			if (!resp.IsSuccessStatusCode){
+				throw new IOException(string.Format("Service health check error, return http status code{0}", resp.StatusCode.ToString()));
+			}
+
+			return resp.ToString();
+		}
+		public async Task<bool> CheckApprovalAsync(Models.NewLoanApplication loanApp){
 			var s_loanApp = new StringContent(loanApp.AsJson(), Encoding.UTF8, "application/json");
 
 			HttpResponseMessage resp;
 
 			try{
-				resp = await _client.PostAsync(_loanCheckerOptions.CheckApplicationPath, s_loanApp);
+				resp = await _client.PostAsync(_loanCheckerOptions.Value.ApprovalCheckPath, s_loanApp);
 			}catch(Exception){
 				throw;
 			}

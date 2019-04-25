@@ -7,7 +7,7 @@
 		<OutputType>Exe</OutputType>
 		<ProjectGuid>113a7792-5729-4b3b-8823-dfaad8e94bfe</ProjectGuid>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-		<AssemblyName>LoanApplication</AssemblyName>
+		<AssemblyName>loan-application-service</AssemblyName>
 		<RootNamespace>LoanApplication</RootNamespace>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 		<AppDesignerFolder>Properties</AppDesignerFolder>
