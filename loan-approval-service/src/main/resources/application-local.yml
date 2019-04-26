@@ -1,0 +1,13 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+max-loan-amount: 10000
+
+approvals:
+  naughtylist:
+    - trunp
+    - mhay
+    - unn
