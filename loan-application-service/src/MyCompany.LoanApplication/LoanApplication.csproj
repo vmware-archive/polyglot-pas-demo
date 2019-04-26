@@ -6,7 +6,7 @@
 		<RuntimeIdentifiers>win10-x64;win-x64</RuntimeIdentifiers>
 		<OutputType>Exe</OutputType>
 		<ProjectGuid>113a7792-5729-4b3b-8823-dfaad8e94bfe</ProjectGuid>
-		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
 		<AssemblyName>loan-application-service</AssemblyName>
 		<RootNamespace>LoanApplication</RootNamespace>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,6 +44,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 		<PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.2.0" />
 		<PackageReference Include="Steeltoe.Discovery.ClientCore" Version="2.2.0" />
 		<PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.2.0" />
