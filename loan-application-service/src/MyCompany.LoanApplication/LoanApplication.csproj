@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
 		<TargetFramework>net47</TargetFramework>
@@ -6,7 +6,7 @@
 		<RuntimeIdentifiers>win10-x64;win-x64</RuntimeIdentifiers>
 		<OutputType>Exe</OutputType>
 		<ProjectGuid>113a7792-5729-4b3b-8823-dfaad8e94bfe</ProjectGuid>
-		<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<AssemblyName>loan-application-service</AssemblyName>
 		<RootNamespace>LoanApplication</RootNamespace>
 		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
