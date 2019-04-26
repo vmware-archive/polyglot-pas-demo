@@ -15,15 +15,36 @@ namespace LoanApplication.Models
 			_db = db;
 		}
 
-		public IQueryable<LoanApplicationEntity> Search(string FullName)
+		public IQueryable<LoanApplicationEntity> SearchByName(string fullName)
 		{
-			var loans = _db.Loans.Where(q => q.FullName.ToLower().Equals(FullName.ToLower()));
+			var loans = _db.Loans.Where(q => q.FullName.ToLower().Equals(fullName.ToLower()));
 			return loans;
 		}
-		public async Task<LoanApplicationEntity> GetAsync(int loanId)
+		public async Task<LoanApplicationEntity> GetAsync(Guid id)
 		{
-			var loan = await _db.Loans.FirstOrDefaultAsync(q => q.Id == loanId);
+			var loan = await _db.Loans.FirstOrDefaultAsync(q => q.Id == id);
 			return loan;
+		}
+		public async Task<List<LoanApplicationEntity>> ListAsync()
+		{
+			var loan = await _db.Loans.ToListAsync();
+			return loan;
+		}
+		public async Task<LoanApplicationEntity> AddAsync(LoanApplicationEntity loan)
+		{
+			await _db.Loans.AddAsync(loan);
+			await _db.SaveChangesAsync();
+
+			var newLoan = await GetAsync(loan.Id);
+
+			return newLoan;
+		}
+		public async void RemoveAsync(Guid id){
+			var newLoan = await GetAsync(id);
+			_db.Remove(newLoan);
+			await _db.SaveChangesAsync();
+
+			return;
 		}
 	}
 }
