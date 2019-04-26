@@ -1,0 +1,9 @@
+---
+applications:
+- name: loan-checker
+  path: target/loan-checker-0.0.1-SNAPSHOT.jar
+  services:
+    - loans-config
+    - loans-discovery
+  env:
+    SPRING_PROFILES_ACTIVE: test
