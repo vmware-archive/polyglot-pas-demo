@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace LoanApplication.Services
 {
@@ -33,7 +34,7 @@ namespace LoanApplication.Services
 
 			return resp.ToString();
 		}
-		public async Task<bool> CheckApprovalAsync(Models.NewLoanApplication loanApp){
+		public async Task<Models.LoanApplicationEntity> CheckApprovalAsync(Models.LoanApplicationEntity loanApp){
 			var s_loanApp = new StringContent(loanApp.AsJson(), Encoding.UTF8, "application/json");
 
 			HttpResponseMessage resp;
@@ -48,7 +49,9 @@ namespace LoanApplication.Services
 				throw new IOException(string.Format("Error checking loan, return http status code{0}", resp.StatusCode.ToString()));
 			}
 
-			return true;
+			var respLoan = JsonConvert.DeserializeObject<Models.LoanApplicationEntity>(resp.Content.ToString());
+
+			return respLoan;
 		}
 	}
 }

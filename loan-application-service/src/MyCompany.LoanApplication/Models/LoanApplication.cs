@@ -5,14 +5,14 @@ namespace LoanApplication.Models
 {
 	public class LoanApplication
 	{
-		public int Id { get; set; }
-		public string FullName { get; set; }
-		public double Amount { get; set; }
-		public LoanStatus LoanStatus { get; set; }
+		public string id { get; set; }
+		public string name { get; set; }
+		public double amount { get; set; }
+		public LoanStatus status { get; set; }
 
 		public override string ToString()
 		{
-			return $"Loan[{this.Id},{this.FullName},{this.Amount},{this.LoanStatus}]";
+			return $"Loan[{this.id},{this.name},{this.amount},{this.status}]";
 		}
 		public string AsJson()
 		{

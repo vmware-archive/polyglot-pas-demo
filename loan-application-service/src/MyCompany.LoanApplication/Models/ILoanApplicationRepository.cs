@@ -7,7 +7,10 @@ namespace LoanApplication.Models
 {
 	public interface ILoanApplicationRepository
 	{
-		IQueryable<LoanApplicationEntity> Search(string text);
-		Task<LoanApplicationEntity> GetAsync(int id);
+		IQueryable<LoanApplicationEntity> SearchByName(string fullName);
+		Task<LoanApplicationEntity> GetAsync(Guid id);
+		Task<List<LoanApplicationEntity>> ListAsync();
+		Task<LoanApplicationEntity> AddAsync(LoanApplicationEntity loan);
+		void RemoveAsync(Guid id);
 	}
 }
