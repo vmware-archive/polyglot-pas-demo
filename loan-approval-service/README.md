@@ -40,3 +40,7 @@ mvn clean install -P cloud -DskipTests
 
 ```bash
 cf push <application-name> -f <manifest-file>
+```
+
+[1]: http://dolszewski.com/spring/spring-boot-properties-per-maven-profile/
+
