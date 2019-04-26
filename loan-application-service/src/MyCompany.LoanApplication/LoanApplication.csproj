@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net47</TargetFramework>
+		<Platforms>x64</Platforms>
+		<RuntimeIdentifiers>win10-x64;win-x64</RuntimeIdentifiers>
+		<OutputType>Exe</OutputType>
+		<ProjectGuid>113a7792-5729-4b3b-8823-dfaad8e94bfe</ProjectGuid>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<AssemblyName>loan-application-service</AssemblyName>
+		<RootNamespace>LoanApplication</RootNamespace>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<UseIISExpress>true</UseIISExpress>
+		<Use64BitIISExpress />
+		<IISExpressSSLPort />
+		<FileAlignment>512</FileAlignment>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+		<PlatformTarget>x64</PlatformTarget>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+		<PlatformTarget>x64</PlatformTarget>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="EntityFramework" Version="6.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+		<PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Discovery.ClientCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Extensions.Configuration.ConfigServerCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Management.ExporterCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Management.TracingCore" Version="2.2.0" />
+		<PackageReference Include="Steeltoe.Security.Authentication.CloudFoundryCore" Version="2.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Controllers\LoanApplicationController.cs" />
+		<None Include="Startup.cs" />
+		<None Include="Program.cs" />
+
+		<None Include="appsettings.json" />
+	</ItemGroup>
+	<!--
+	 To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+
+</Project>
