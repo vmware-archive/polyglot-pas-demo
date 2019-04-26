@@ -96,7 +96,8 @@ namespace LoanApplication{
 				app.UseCloudFoundryActuators();
 				app.UseMetricsExporter();
 			}
-			
+
+			app.UseRefreshActuator();
 			app.UseTracingExporter();
 			app.UseMvc();
 			app.UseDiscoveryClient();
