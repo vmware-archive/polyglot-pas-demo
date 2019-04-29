@@ -42,5 +42,7 @@ mvn clean install -P cloud -DskipTests
 cf push <application-name> -f <manifest-file>
 ```
 
+The manifest will control what gets deployed. When developing and building the JAR locally, I use `local-manifest.yml` to push it to the PAS environment.
+
 [1]: http://dolszewski.com/spring/spring-boot-properties-per-maven-profile/
 
