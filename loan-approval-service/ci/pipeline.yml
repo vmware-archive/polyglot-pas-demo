@@ -16,7 +16,7 @@ jobs:
   - get: source-code
     trigger: true
   - task: package-loan-checker
-    file: source-code/ci/tasks/build-loan-checker.yml
+    file: source-code/loan-approval-service/ci/tasks/build-loan-checker.yml
   - put: push-to-pcf
     params:
       manifest: source-code/loan-approval-service/test-manifest.yml
@@ -43,7 +43,7 @@ jobs:
     trigger: true
     passed: [build-loan-checker]
   - task: smoke-test-loan-checker
-    file: source-code/ci/tasks/smoke-test-loan-checker.yml
+    file: source-code/loan-approval-service/ci/tasks/smoke-test-loan-checker.yml
     params:
       URL: ((loan-checker-test-url))
     on_success:
