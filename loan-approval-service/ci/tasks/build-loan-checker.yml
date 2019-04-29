@@ -14,4 +14,4 @@ outputs:
 - name: package-output
 
 run:
-  path: source-code/ci/tasks/build-loan-checker.sh
+  path: source-code/loan-approval-service/ci/tasks/build-loan-checker.sh
