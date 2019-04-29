@@ -14,4 +14,4 @@ inputs:
 - name: source-code
 
 run:
-  path: source-code/ci/tasks/smoke-test-loan-checker.sh
+  path: source-code/loan-approval-service/ci/tasks/smoke-test-loan-checker.sh
