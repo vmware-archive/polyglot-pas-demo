@@ -4,7 +4,11 @@ apt-get update && apt-get install -y curl uuid-runtime httpie jq --allow-unauthe
 
 set -eu
 
-echo "Smoke Testing the Loan Checker using the URL: ${URL}"
+echo "****************************************"
+echo "Smoke Testing the Loan Approval Service."
+echo  "API TARGET: ${URL}"
+echo "****************************************"
+echo " "
 
 # Begin the Smoke-testing...
 
@@ -40,14 +44,12 @@ fi
 
 export RANDOM_LOAN_ID=`uuidgen`
 export LOAN_CHECK_RESP=`http POST ${URL}/check id=${RANDOM_LOAN_ID} name=Wilcock amount=100 status=PENDING`
-# echo -e ${LOAN_CHECK_RESP}
-# echo ${LOAN_CHECK_RESP} | jq -r .status
 if [[ -z ${LOAN_CHECK_RESP} ]] || [[ `echo ${LOAN_CHECK_RESP} | jq -r .status`  != "APPROVED" ]]
 then
-    echo -e "Test failed. Loan was not approved ($LOAN_CHECK_RESP)"
+    echo -e "Test failed. Loan was not approved but it should have been? ($LOAN_CHECK_RESP)"
     exit 1
 else
-    echo -e "Test passed. Loan is APPROVED"
+    echo -e "Test passed. Loan was APPROVED."
 fi
 
 # Test that loans for people on the Naughty List are REJECTED
@@ -57,10 +59,10 @@ echo -e ${LOAN_CHECK_RESP}
 # echo ${LOAN_CHECK_RESP} | jq -r .status
 if [[ -z ${LOAN_CHECK_RESP} ]] || [[ `echo ${LOAN_CHECK_RESP} | jq -r .status`  != "REJECTED" ]]
 then
-    echo -e "Test failed. Loan was approved ($LOAN_CHECK_RESP)"
+    echo -e "Test failed. Loan was approved but should not have been? ($LOAN_CHECK_RESP)"
     exit 1
 else
-    echo -e "Test passed. Naughty person's loan is REJECTED"
+    echo -e "Test passed. Naughty person's loan was REJECTED."
 fi
 
 # Test that loans over the Max Amount Threshold are REJECTED
@@ -74,6 +76,16 @@ then
     exit 1
 else
     echo -e "Test passed. Large loan is REJECTED"
+fi
+
+
+export LAST_LOAN=`http GET ${URL}/statuses | jq -c 'map(select(.id | contains("'${RANDOM_LOAN_ID}'")))'`
+if [[ -z ${LAST_LOAN} ]]
+then
+  echo "Test failed. The last LOAN CHECK request is NOT in the /statuses list! ${RANDOM_LOAN_ID}"
+  exit 1
+else
+  echo "Test passed. The last LOAN CHECK request is in the /statuses list: ${LAST_LOAN}" 
 fi
 
 echo "*************** SUCCESS! ****************"
