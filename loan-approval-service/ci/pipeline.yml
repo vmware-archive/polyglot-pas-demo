@@ -17,7 +17,7 @@ jobs:
     trigger: true
   - task: package-loan-checker
     file: source-code/loan-approval-service/ci/tasks/build-loan-checker.yml
-  - put: push-to-pcf
+  - put: push-to-test
     params:
       manifest: source-code/loan-approval-service/test-manifest.yml
       path: package-output/loan-approval-service.jar
@@ -57,6 +57,29 @@ jobs:
         text: |
           `$BUILD_JOB_NAME` *FAILED* :x:
 
+- name: promote-loan-checker
+  plan:
+  - get: manualtrigger
+    trigger: true
+    passed: [smoke-test-loan-checker]
+  - get: source-code
+    trigger: true
+    passed: [smoke-test-loan-checker]
+  - put: push-to-prod
+    params:
+      manifest: source-code/loan-approval-service/prod-manifest.yml
+      path: package-output/loan-approval-service.jar
+    on_success:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` pushed --> ((loan-checker-prod-url)) to CloudyAzure.
+    on_failure:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` has *FAILED*, please check the logs.
+
 resource_types:
 
 - name: slack-notification
@@ -78,7 +101,7 @@ resources:
     branch: master
     private_key: ((git-private-key))
 
-- name: push-to-pcf
+- name: push-to-test
   type: cf
   source:
     api: ((cf-endpoint))
@@ -88,6 +111,15 @@ resources:
     space: ((cf-space))
     skip_cert_check: true
 
+- name: push-to-prod
+  type: cf
+  source:
+    api: ((cf-endpoint))
+    username: ((cf-user))
+    password: ((cf-password))
+    organization: ((cf-org))
+    space: ((cf-space))
+    skip_cert_check: true
 - name: slack-alert
   type: slack-notification
   source:
