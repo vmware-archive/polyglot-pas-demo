@@ -17,18 +17,18 @@ public class LoanCheckService {
   private static final Logger LOGGER = LoggerFactory.getLogger(LoanCheckService.class);
 
   private final Long maxLoanAmount;
-  private final List<String> blacklist;
+  private final List<String> naughtyList;
   private final Map<String, LoanApplication> approvedLoans;
   private final Map<String, LoanApplication> rejectedLoans;
 
   @Autowired
   public LoanCheckService(@Value("${max-loan-amount:100}") Long loanThreshold, LoansConfiguration loansConfiguration) {
     this.maxLoanAmount = loanThreshold;
-    this.blacklist = loansConfiguration.getNaughtyList();
+    this.naughtyList = loansConfiguration.getNaughtyList();
 
     LOGGER.info("The maximum loan is: {}", maxLoanAmount);
-    LOGGER.info("The Naughty List has {} entries...", this.blacklist.size());
-    this.blacklist.forEach(person -> LOGGER.info("'{}' is on the Naughty List", person));
+    LOGGER.info("The Naughty List has {} entries...", this.naughtyList.size());
+    this.naughtyList.forEach(person -> LOGGER.info("'{}' is on the Naughty List", person));
 
     this.approvedLoans = new HashMap<>();
     this.rejectedLoans = new HashMap<>();
@@ -47,7 +47,7 @@ public class LoanCheckService {
       return application;
     }
 
-    if (blacklist.contains(application.getName().toLowerCase())) {
+    if (naughtyList.contains(application.getName().toLowerCase())) {
       reject(application);
       return application;
     }
