@@ -11,3 +11,6 @@ approvals:
     - trunp
     - mhay
     - unn
+
+server:
+  port: 80
