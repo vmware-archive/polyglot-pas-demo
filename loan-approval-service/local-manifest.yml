@@ -2,6 +2,8 @@
 applications:
 - name: loan-checker
   path: target/loan-checker-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: loan-checker-test.apps.cloudyazure.io
   services:
     - loans-config
     - loans-discovery

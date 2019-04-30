@@ -3,7 +3,7 @@ applications:
 - name: loan-checker
   path: target/loan-approval-service.jar
   routes:
-    - route: loan-checker-prod.cloudyazure.io
+    - route: loan-checker-prod.apps.cloudyazure.io
   services:
     - loans-config
     - loans-discovery
