@@ -34,7 +34,7 @@ namespace LoanApplication.Services
 
 			return resp.ToString();
 		}
-		public async Task<Models.LoanApplicationEntity> CheckApprovalAsync(Models.LoanApplicationEntity loanApp){
+		public async Task<Models.LoanApplication> CheckApprovalAsync(Models.LoanApplication loanApp){
 			var s_loanApp = new StringContent(loanApp.AsJson(), Encoding.UTF8, "application/json");
 
 			HttpResponseMessage resp;
@@ -49,7 +49,7 @@ namespace LoanApplication.Services
 				throw new IOException(string.Format("Error checking loan, return http status code{0}", resp.StatusCode.ToString()));
 			}
 
-			var respLoan = JsonConvert.DeserializeObject<Models.LoanApplicationEntity>(resp.Content.ToString());
+			var respLoan = JsonConvert.DeserializeObject<Models.LoanApplication>(resp.Content.ToString());
 
 			return respLoan;
 		}

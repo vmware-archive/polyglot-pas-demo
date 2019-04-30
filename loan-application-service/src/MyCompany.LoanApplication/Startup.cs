@@ -4,10 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 
 using LoanApplication.Models;
@@ -15,12 +12,10 @@ using LoanApplication.Models;
 using Steeltoe.Management.CloudFoundry;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 using Steeltoe.Discovery.Client;
-using Steeltoe.Security.Authentication.CloudFoundry;
 using Steeltoe.Management.Endpoint.Metrics;
 using Steeltoe.Management.Exporter.Metrics;
 using Steeltoe.Management.Tracing;
 using Steeltoe.Management.Exporter.Tracing;
-using Steeltoe.Extensions.Configuration.ConfigServer;
 using Steeltoe.CloudFoundry.Connector.SqlServer.EFCore;
 using Steeltoe.Common.Http.Discovery;
 using Steeltoe.Management.Endpoint.Refresh;
@@ -100,6 +95,7 @@ namespace LoanApplication{
 			app.UseRefreshActuator();
 			app.UseTracingExporter();
 			app.UseMvc();
+
 			app.UseDiscoveryClient();
 		}
 		private void writeChild(IConfigurationSection sec, int tabs)

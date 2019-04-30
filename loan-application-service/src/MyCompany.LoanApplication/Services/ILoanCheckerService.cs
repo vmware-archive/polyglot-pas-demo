@@ -5,7 +5,7 @@ namespace LoanApplication.Services
 {
 	public interface ILoanCheckerService
 	{
-		Task<Models.LoanApplicationEntity> CheckApprovalAsync(Models.LoanApplicationEntity loanApp);
+		Task<Models.LoanApplication> CheckApprovalAsync(Models.LoanApplication loanApp);
 		Task<string> ServiceHealthCheck();
 	}
 }

@@ -10,7 +10,8 @@ namespace LoanApplication.Models
 		IQueryable<LoanApplicationEntity> SearchByName(string fullName);
 		Task<LoanApplicationEntity> GetAsync(Guid id);
 		Task<List<LoanApplicationEntity>> ListAsync();
-		Task<LoanApplicationEntity> AddAsync(LoanApplicationEntity loan);
+		Task<LoanApplicationEntity> AddAsync(NewLoanApplication loan);
 		void RemoveAsync(Guid id);
+		void UpdateAsync(LoanApplication loanApp);
 	}
 }

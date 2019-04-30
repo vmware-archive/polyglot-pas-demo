@@ -30,14 +30,29 @@ namespace LoanApplication.Models
 			var loan = await _db.Loans.ToListAsync();
 			return loan;
 		}
-		public async Task<LoanApplicationEntity> AddAsync(LoanApplicationEntity loan)
-		{
-			await _db.Loans.AddAsync(loan);
+		public async Task<LoanApplicationEntity> AddAsync(NewLoanApplication newLoanApp){
+			var createApp = new Models.LoanApplicationEntity(){
+				FullName = newLoanApp.name,
+				Amount = newLoanApp.amount,
+				LoanStatus = Models.LoanStatus.Pending
+			};
+
+			await _db.Loans.AddAsync(createApp);
 			await _db.SaveChangesAsync();
 
-			var newLoan = await GetAsync(loan.Id);
+			var newLoan = await GetAsync(createApp.Id);
 
 			return newLoan;
+		}
+		public async void UpdateAsync(LoanApplication loanApp){
+			var loanAs = loanApp.AsLoanApplicationEntity();
+
+			var loan = await _db.Loans.FirstAsync(q => q.Id == loanAs.Id);
+
+			loan.LoanStatus = loanAs.LoanStatus;
+			await _db.SaveChangesAsync();
+
+			return;
 		}
 		public async void RemoveAsync(Guid id){
 			var newLoan = await GetAsync(id);
