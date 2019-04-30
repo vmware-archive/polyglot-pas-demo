@@ -37,14 +37,17 @@ namespace LoanApplication{
 			if (Environment.IsDevelopment()){
 				services.AddDbContext<LoanApplicationContext>(
 								options => options.UseInMemoryDatabase("Loans"));
-			}else if(Environment.IsStaging()){
+				writeConfig();
+			}
+			else if(Environment.IsStaging()){
 				services.AddDbContext<LoanApplicationContext>(
 						options => options.UseSqlServer(Configuration));
-			}else{
+				writeConfig();
+			}
+			else{
 				services.AddDbContext<LoanApplicationContext>(
 						options => options.UseSqlServer(Configuration));
 			}
-			writeConfig();
 
 			services.AddScoped<ILoanApplicationRepository, LoanApplicationRepository>();
 			services.Configure<Services.LoanCheckerOptions>(Configuration.GetSection("loanApprovalService"));

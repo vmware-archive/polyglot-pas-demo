@@ -21,7 +21,7 @@ namespace LoanApplication{
 				//.AddCloudFoundry()
 				.UseStartup<Startup>()
 				.ConfigureAppConfiguration((hostingContext, config) =>{
-					ILoggerFactory fac = GetLoggerFactory();
+					ILoggerFactory fac = GetLoggerFactory(hostingContext.HostingEnvironment);
 					var env = hostingContext.HostingEnvironment;
 
 					config.AddConfigServer(env, fac);
@@ -31,9 +31,14 @@ namespace LoanApplication{
 				})
 				;
 
-		public static ILoggerFactory GetLoggerFactory(){
+		public static ILoggerFactory GetLoggerFactory(IHostingEnvironment env){
 			IServiceCollection serviceCollection = new ServiceCollection();
-			serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Information));
+			
+			if(env.IsProduction())
+				serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Error));
+			else
+				serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Information));
+
 			serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>{
 				opts.DisableColors = true;
 			}));
