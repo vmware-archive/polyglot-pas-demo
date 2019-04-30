@@ -75,7 +75,7 @@ namespace LoanApplication.Controllers{
 				return BadRequest("Missing loan applicant name");
 
 			//Add the new entry to get id
-			var loan = await _loans.AddAsync(newApp);
+			var loan = _loans.Add(newApp);
 
 			if(_env.IsDevelopment())
 				return Models.LoanApplication.FromJson(loan.AsLoanApplication().AsJson());
@@ -99,7 +99,7 @@ namespace LoanApplication.Controllers{
 
 			//save new status
 			try{
-				_loans.UpdateAsync(loanApproval);
+				_loans.Update(loanApproval);
 			}catch(ArgumentNullException an){
 				_logger.LogError(an, "Error updating loan status after check for approval, argument {0} value was not found",an.ParamName);
 				return StatusCode(StatusCodes.Status500InternalServerError);
@@ -128,7 +128,7 @@ namespace LoanApplication.Controllers{
 		[HttpDelete("{id}")]
 		public void Remove(Guid id)
 		{
-			_loans.RemoveAsync(id);
+			_loans.Remove(id);
 
 			return;
 		}

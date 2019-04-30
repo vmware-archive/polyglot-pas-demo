@@ -28,6 +28,11 @@ namespace LoanApplication.Models
 			var loan = await _db.Loans.FirstAsync(q => q.Id.Equals(id));
 			return loan;
 		}
+		public LoanApplicationEntity Get(Guid id)
+		{
+			var loan = _db.Loans.First(q => q.Id.Equals(id));
+			return loan;
+		}
 		public async Task<List<LoanApplicationEntity>> ListAsync()
 		{
 			var loan = await _db.Loans.ToListAsync();
@@ -45,6 +50,18 @@ namespace LoanApplication.Models
 			
 			return createApp;
 		}
+		public LoanApplicationEntity Add(NewLoanApplication newLoanApp){
+			var createApp = new Models.LoanApplicationEntity(){
+				FullName = newLoanApp.name,
+				Amount = newLoanApp.amount,
+				LoanStatus = Models.LoanStatus.PENDING
+			};
+
+			_db.Loans.Add(createApp);
+			_db.SaveChanges();
+			
+			return createApp;
+		}
 		public async void UpdateAsync(LoanApplication loanApp){
 			var loanAs = loanApp.AsLoanApplicationEntity();
 
@@ -56,10 +73,30 @@ namespace LoanApplication.Models
 
 			return;
 		}
+		public  void Update(LoanApplication loanApp){
+			var loanAs = loanApp.AsLoanApplicationEntity();
+
+			var loan =  _db.Loans.First(q => q.Id.Equals(loanAs.Id));
+
+			loan.LoanStatus = loanAs.LoanStatus;
+			
+			_db.SaveChanges();
+
+			return;
+		}
 		public async void RemoveAsync(Guid id){
-			var loan = await _db.Loans.FirstAsync(q => q.Id.Equals(id));
+			LoanApplicationEntity loan = _db.Loans.Find(id);
+			
 			_db.Remove(loan);
 			await _db.SaveChangesAsync();
+
+			return;
+		}
+		public void Remove(Guid id){
+			LoanApplicationEntity loan = _db.Loans.Find(id);
+			
+			_db.Remove(loan);
+			_db.SaveChanges();
 
 			return;
 		}
