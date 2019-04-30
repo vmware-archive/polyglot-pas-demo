@@ -36,12 +36,9 @@ jobs:
   serial: true
   public: false
   plan:
-  # - get: manualtrigger
-  #   trigger: true
-  #   passed: [promote-loan-checker]
-  # - get: source-code
-  #   trigger: false
-  #   passed: [promote-loan-checker]
+  - get: source-code
+    trigger: false
+    passed: [promote-loan-checker]
   - get: push-to-prod
     trigger: true
     passed: [promote-loan-checker]

@@ -36,10 +36,10 @@ jobs:
   serial: true
   public: false
   plan:
-  - get: manualtrigger
-    trigger: true
-    passed: [build-loan-checker]
   - get: source-code
+    trigger: false
+    passed: [build-loan-checker]
+  - get: push-to-test
     trigger: true
     passed: [build-loan-checker]
   - task: smoke-test-loan-checker
