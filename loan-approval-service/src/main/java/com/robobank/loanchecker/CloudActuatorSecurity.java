@@ -13,5 +13,6 @@ public class CloudActuatorSecurity extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.requestMatcher(EndpointRequest.toAnyEndpoint()).authorizeRequests()
             .anyRequest().permitAll();
+    http.csrf().disable();
   }
 }

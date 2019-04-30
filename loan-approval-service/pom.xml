@@ -18,6 +18,7 @@
 		<java.version>1.8</java.version>
 		<spring-cloud-services.version>2.1.2.RELEASE</spring-cloud-services.version>
 		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+		<spring-cloud-sleuth.version>2.0.0.RELEASE</spring-cloud-sleuth.version>
 	</properties>
 
 	<dependencies>
@@ -100,6 +101,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-security</artifactId>
 				</dependency>
+				<dependency>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-starter-sleuth</artifactId>
+				</dependency>
 			</dependencies>
 		</profile>
 	</profiles>
@@ -120,6 +125,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>org.springframework.cloud</groupId>-->
+<!--				<artifactId>spring-cloud-sleuth</artifactId>-->
+<!--				<version>${spring-cloud-sleuth.version}</version>-->
+<!--				<type>pom</type>-->
+<!--				<scope>import</scope>-->
+<!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 
