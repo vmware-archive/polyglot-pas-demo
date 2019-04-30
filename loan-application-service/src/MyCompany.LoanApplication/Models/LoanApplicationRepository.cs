@@ -34,7 +34,7 @@ namespace LoanApplication.Models
 			var createApp = new Models.LoanApplicationEntity(){
 				FullName = newLoanApp.name,
 				Amount = newLoanApp.amount,
-				LoanStatus = Models.LoanStatus.Pending
+				LoanStatus = Models.LoanStatus.PENDING
 			};
 
 			await _db.Loans.AddAsync(createApp);

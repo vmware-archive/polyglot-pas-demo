@@ -25,7 +25,7 @@ namespace LoanApplication.Models
 					Amount = 0,
 					FullName = "Test Test",
 					Id = Guid.Empty,
-					LoanStatus = LoanStatus.Rejected
+					LoanStatus = LoanStatus.REJECTED
 				});
 
 				await db.SaveChangesAsync();
