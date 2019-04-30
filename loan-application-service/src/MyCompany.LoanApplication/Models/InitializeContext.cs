@@ -18,8 +18,8 @@ namespace LoanApplication.Models
 				//await db.Database.MigrateAsync();
 				bool isCreated = await db.Database.EnsureCreatedAsync();
 
-				if (!isCreated)
-					throw new Exception("Database count not be initialized");
+				if (!isCreated) //false means it's already created
+					return;
 
 				db.Add(new LoanApplicationEntity() {
 					Amount = 0,
