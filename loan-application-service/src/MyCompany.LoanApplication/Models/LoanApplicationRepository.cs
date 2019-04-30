@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Models
 {
 	public class LoanApplicationRepository : ILoanApplicationRepository
 	{
 		private LoanApplicationContext _db;
+		private readonly ILogger<LoanApplicationRepository> _logger;
 
-		public LoanApplicationRepository(LoanApplicationContext db)
+		public LoanApplicationRepository(LoanApplicationContext db,			ILogger<LoanApplicationRepository> logger)
 		{
 			_db = db;
+			_logger = logger;
 		}
 
 		public IQueryable<LoanApplicationEntity> SearchByName(string fullName)

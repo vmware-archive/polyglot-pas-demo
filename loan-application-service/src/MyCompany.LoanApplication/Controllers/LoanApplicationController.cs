@@ -61,7 +61,7 @@ namespace LoanApplication.Controllers{
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			}
 
-			return loan.AsLoanApplication();
+			return loan.AsLoanApplication(_logger);
 		}
 		
 		// POST /apply
@@ -78,12 +78,12 @@ namespace LoanApplication.Controllers{
 			var loan = await _loans.AddAsync(newApp);
 
 			if(_env.IsDevelopment())
-				return loan.AsLoanApplication();
+				return loan.AsLoanApplication(_logger);
 
 			//check for approval
 			Models.LoanApplication loanApproval = null;
 			try{
-				loanApproval = await _loanCheckerservice.CheckApprovalAsync(loan.AsLoanApplication());
+				loanApproval = await _loanCheckerservice.CheckApprovalAsync(loan.AsLoanApplication(_logger));
 			}catch(IOException io){ //http response code != 200
 				_logger.LogError(io,"Error running loan check");
 				return StatusCode(StatusCodes.Status500InternalServerError);
@@ -108,7 +108,7 @@ namespace LoanApplication.Controllers{
 				return StatusCode(StatusCodes.Status500InternalServerError);
 			}
 
-			return loan.AsLoanApplication();
+			return loan.AsLoanApplication(_logger);
 		}
 
 		// GET /list
@@ -119,7 +119,7 @@ namespace LoanApplication.Controllers{
 			var result = new List<Models.LoanApplication>();
 
 			foreach (var loan in loans)
-				result.Add(loan.AsLoanApplication());
+				result.Add(loan.AsLoanApplication(_logger));
 
 			return result;
 		}

@@ -1,39 +1,76 @@
 ﻿using System;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Models
 {
 	public class LoanApplication
 	{
-		public string id { get; set; }
-		public string name { get; set; }
-		public double amount { get; set; }
-		public string status { get; set; }
+		private readonly ILogger _logger = null;
 
+		public string id { get; }
+		public string name { get; }
+		public double amount { get; }
+		public string status { get; }
+
+		public LoanApplication(string id,
+				string name,
+				double amount,
+				string status,
+				ILogger logger){
+
+			if (string.IsNullOrEmpty(id))
+				throw new NullReferenceException("id");
+
+			if (string.IsNullOrEmpty(status))
+				throw new NullReferenceException("status");
+
+			if (string.IsNullOrEmpty(name))
+				throw new NullReferenceException("name");
+
+			this.id = id;
+			this.amount = amount;
+			this.name = name;
+			this.status = status;
+
+			_logger = logger;
+			_logger.LogInformation("New Model.LoanApplication object");
+			_logger.LogInformation(this.AsJson());
+		}
+		public LoanApplication(string id,
+				string name,
+				double amount,
+				string status){
+
+			if (string.IsNullOrEmpty(id))
+				throw new NullReferenceException("id");
+
+			if (string.IsNullOrEmpty(status))
+				throw new NullReferenceException("status");
+
+			if (string.IsNullOrEmpty(name))
+				throw new NullReferenceException("name");
+
+			this.id = id;
+			this.amount = amount;
+			this.name = name;
+			this.status = status;
+		}
 		public override string ToString()
 		{
-			return $"Loan[{this.id},{this.name},{this.amount},{this.status}]";
+			return $"LoanApplication[{id},{name},{amount},{status}]";
 		}
 		public string AsJson()
 		{
-			return JsonConvert.SerializeObject(this);
+			string ret = string.Format(@"{{""id"":""{0}"",""name"":""{1}"",""amount"":""{2}"",""status"":""{3}""}}", id, name, amount, status);
+			
+			return ret;
 		}
-
 		public LoanApplicationEntity AsLoanApplicationEntity(){
-			if (string.IsNullOrEmpty(this.id))
-				throw new NullReferenceException("Id");
-
-			if (string.IsNullOrEmpty(this.status))
-				throw new NullReferenceException("status");
-
-			if (string.IsNullOrEmpty(this.name))
-				throw new NullReferenceException("name");
-
 			return new LoanApplicationEntity(){
-				Id = Guid.Parse(this.id),
-				FullName = this.name,
-				Amount = this.amount,
-				LoanStatus = (LoanStatus)Enum.Parse(typeof(LoanStatus), this.status)
+				Id = Guid.Parse(id),
+				FullName = name,
+				Amount = amount,
+				LoanStatus = (LoanStatus)Enum.Parse(typeof(LoanStatus), status)
 			};
 		}
 	}

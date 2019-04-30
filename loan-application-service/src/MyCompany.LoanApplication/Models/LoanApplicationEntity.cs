@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Models{
 	public class LoanApplicationEntity{
@@ -10,17 +10,22 @@ namespace LoanApplication.Models{
 		public double Amount { get; set; }
 		public LoanStatus LoanStatus { get; set; }
 
-		public string AsJson(){
-			return JsonConvert.SerializeObject(this);
-		}
-
 		public LoanApplication AsLoanApplication(){
-			return new Models.LoanApplication(){
-				id = this.Id.ToString(),
-				name = this.FullName,
-				amount = this.Amount,
-				status = this.LoanStatus.ToString()
-			};
+			return new Models.LoanApplication(
+					Id.ToString(),
+					FullName,
+					Amount,
+					LoanStatus.ToString()
+			);
+		}
+		public LoanApplication AsLoanApplication(ILogger logger){
+			return new Models.LoanApplication(
+					Id.ToString(),
+					FullName,
+					Amount,
+					LoanStatus.ToString(),
+					logger
+			);
 		}
 	}
 }
