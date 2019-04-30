@@ -22,7 +22,7 @@ public class LoanCheckService {
   private final Map<String, LoanApplication> rejectedLoans;
 
   @Autowired
-  public LoanCheckService(@Value("${max-loan-amount:100}") Long loanThreshold, LocalLoansConfiguration loansConfiguration) {
+  public LoanCheckService(@Value("${max-loan-amount:100}") Long loanThreshold, LoansConfiguration loansConfiguration) {
     this.maxLoanAmount = loanThreshold;
     this.blacklist = loansConfiguration.getNaughtyList();
 

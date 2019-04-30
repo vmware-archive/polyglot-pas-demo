@@ -9,8 +9,19 @@ max-loan-amount: 10000
 approvals:
   naughtylist:
     - trunp
-    - mhay
-    - unn
 
 server:
   port: 80
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix:
+            eureka: OFF
+          config:
+            client: OFF
+    com:
+      netflix:
+        discovery: OFF

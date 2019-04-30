@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @Profile("cloud")
-public class CloudServiceInstanceRestController {
+public class RegistryViewerRestController {
   @Autowired
   private DiscoveryClient discoveryClient;
 

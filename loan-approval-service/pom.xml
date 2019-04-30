@@ -31,6 +31,22 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-services-starter-config-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.pivotal.spring.cloud</groupId>
+			<artifactId>spring-cloud-services-starter-service-registry</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -49,63 +65,13 @@
 
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>simcloud</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<activatedProperties>local</activatedProperties>
-			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<excludes>
-								<exclude>**/Cloud*.java</exclude>
-							</excludes>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>cloud</id>
-			<properties>
 				<activatedProperties>simcloud</activatedProperties>
 			</properties>
-			<build>
-				<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<excludes>
-							<exclude>**/Local*.java</exclude>
-						</excludes>
-					</configuration>
-				</plugin>
-				</plugins>
-			</build>
-			<dependencies>
-				<dependency>
-					<groupId>io.pivotal.spring.cloud</groupId>
-					<artifactId>spring-cloud-services-starter-config-client</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>io.pivotal.spring.cloud</groupId>
-					<artifactId>spring-cloud-services-starter-service-registry</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-security</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-starter-sleuth</artifactId>
-				</dependency>
-			</dependencies>
 		</profile>
 	</profiles>
 
@@ -125,13 +91,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-<!--			<dependency>-->
-<!--				<groupId>org.springframework.cloud</groupId>-->
-<!--				<artifactId>spring-cloud-sleuth</artifactId>-->
-<!--				<version>${spring-cloud-sleuth.version}</version>-->
-<!--				<type>pom</type>-->
-<!--				<scope>import</scope>-->
-<!--			</dependency>-->
 		</dependencies>
 	</dependencyManagement>
 
