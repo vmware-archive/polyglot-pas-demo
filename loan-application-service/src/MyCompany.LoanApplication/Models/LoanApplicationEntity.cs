@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Models{
 	public class LoanApplicationEntity{
@@ -16,15 +15,6 @@ namespace LoanApplication.Models{
 					FullName,
 					Amount,
 					LoanStatus.ToString()
-			);
-		}
-		public LoanApplication AsLoanApplication(ILogger logger){
-			return new Models.LoanApplication(
-					Id.ToString(),
-					FullName,
-					Amount,
-					LoanStatus.ToString(),
-					logger
 			);
 		}
 	}

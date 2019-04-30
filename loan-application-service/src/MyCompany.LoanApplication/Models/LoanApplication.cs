@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace LoanApplication.Models
 {
@@ -12,30 +13,6 @@ namespace LoanApplication.Models
 		public double amount { get; }
 		public string status { get; }
 
-		public LoanApplication(string id,
-				string name,
-				double amount,
-				string status,
-				ILogger logger){
-
-			if (string.IsNullOrEmpty(id))
-				throw new NullReferenceException("id");
-
-			if (string.IsNullOrEmpty(status))
-				throw new NullReferenceException("status");
-
-			if (string.IsNullOrEmpty(name))
-				throw new NullReferenceException("name");
-
-			this.id = id;
-			this.amount = amount;
-			this.name = name;
-			this.status = status;
-
-			_logger = logger;
-			_logger.LogInformation("New Model.LoanApplication object");
-			_logger.LogInformation(this.AsJson());
-		}
 		public LoanApplication(string id,
 				string name,
 				double amount,
@@ -72,6 +49,11 @@ namespace LoanApplication.Models
 				Amount = amount,
 				LoanStatus = (LoanStatus)Enum.Parse(typeof(LoanStatus), status)
 			};
+		}
+		public static LoanApplication FromJson(string json){
+			LoanApplication loan = JsonConvert.DeserializeObject<LoanApplication>(json);
+
+			return loan;
 		}
 	}
 }

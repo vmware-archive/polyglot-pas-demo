@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace LoanApplication.Services
 {
@@ -12,12 +12,15 @@ namespace LoanApplication.Services
 	{
 		private HttpClient _client;
 		private IOptions<Services.LoanCheckerOptions> _loanCheckerOptions;
+		private ILogger<LoanCheckerService> _logger;
 
 		public LoanCheckerService(HttpClient client,
-											IOptions<Services.LoanCheckerOptions> loanCheckerOptions)
+											IOptions<Services.LoanCheckerOptions> loanCheckerOptions,
+											ILogger<LoanCheckerService> logger)
 		{
 			_client = client;
 			_loanCheckerOptions = loanCheckerOptions;
+			_logger = logger;
 		}
 		public async Task<string> ServiceHealthCheck(){
 			HttpResponseMessage resp;
@@ -35,6 +38,10 @@ namespace LoanApplication.Services
 			return resp.ToString();
 		}
 		public async Task<Models.LoanApplication> CheckApprovalAsync(Models.LoanApplication loanApp){
+
+			_logger.LogInformation("Sending loan for approval");
+			_logger.LogInformation(loanApp.AsJson());
+
 			var s_loanApp = new StringContent(loanApp.AsJson(), Encoding.UTF8, "application/json");
 
 			HttpResponseMessage resp;
@@ -46,10 +53,16 @@ namespace LoanApplication.Services
 			}
 			
 			if (!resp.IsSuccessStatusCode){
-				throw new IOException(string.Format("Error checking loan, return http status code{0}", resp.StatusCode.ToString()));
+				_logger.LogError("Error requesting approval, http code {StatusCode}, reason {ReasonPhrase}", resp);
+				throw new IOException(string.Format("Error checking loan, return http status code {0}", resp.StatusCode));
 			}
 
-			var respLoan = JsonConvert.DeserializeObject<Models.LoanApplication>(resp.Content.ToString());
+			string respContent = await resp.Content.ReadAsStringAsync();
+
+			_logger.LogInformation("Approval service response");
+			_logger.LogInformation(respContent);
+
+			var respLoan = Models.LoanApplication.FromJson(respContent);
 
 			return respLoan;
 		}

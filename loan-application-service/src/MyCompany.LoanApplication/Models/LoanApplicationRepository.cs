@@ -42,25 +42,23 @@ namespace LoanApplication.Models
 
 			await _db.Loans.AddAsync(createApp);
 			await _db.SaveChangesAsync();
-
-			var newLoan = await GetAsync(createApp.Id);
-
-			return newLoan;
+			
+			return createApp;
 		}
 		public async void UpdateAsync(LoanApplication loanApp){
 			var loanAs = loanApp.AsLoanApplicationEntity();
 
-			var loan = await GetAsync(loanAs.Id);
+			var loan = await _db.Loans.FirstAsync(q => q.Id.Equals(loanAs.Id));
 
 			loan.LoanStatus = loanAs.LoanStatus;
 			
-			await _db.SaveChangesAsync();
+			_db.SaveChanges();
 
 			return;
 		}
 		public async void RemoveAsync(Guid id){
-			var newLoan = await GetAsync(id);
-			_db.Remove(newLoan);
+			var loan = await _db.Loans.FirstAsync(q => q.Id.Equals(id));
+			_db.Remove(loan);
 			await _db.SaveChangesAsync();
 
 			return;
