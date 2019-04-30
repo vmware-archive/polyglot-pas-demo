@@ -1,3 +1,5 @@
+
+
 management:
   endpoints:
     web:
@@ -9,3 +11,6 @@ max-loan-amount: 100
 approvals:
   naughtylist:
     - noname
+
+server:
+  port: 80
