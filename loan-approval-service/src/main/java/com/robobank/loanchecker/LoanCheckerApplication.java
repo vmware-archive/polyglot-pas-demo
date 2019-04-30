@@ -8,10 +8,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableConfigurationProperties
-public class CloudLoanCheckerApplication {
+public class LoanCheckerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CloudLoanCheckerApplication.class, args);
+		SpringApplication.run(LoanCheckerApplication.class, args);
 	}
 
 }

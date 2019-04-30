@@ -7,7 +7,7 @@ echo "The path is ${OLDPATH}"
 
 echo "Testing and Packaging the Loan Checker JAR..."
 cd source-code/loan-approval-service
-  mvn verify -P cloud -Dspring.profiles.active=simcloud
+  mvn verify
 cd $FOLDER
 
 jar_count=`find source-code/loan-approval-service/target -type f -name *.jar | wc -l`
