@@ -3,9 +3,9 @@ applications:
 - name: loan-checker
   path: target/loan-approval-service.jar
   routes:
-    - route: loan-checker-test.apps.cloudyazure.io
+    - route: loan-checker-prod.apps.cloudyazure.io
   services:
     - loans-config
     - loans-discovery
   env:
-    SPRING_PROFILES_ACTIVE: test
+    SPRING_PROFILES_ACTIVE: prod

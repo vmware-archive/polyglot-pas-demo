@@ -1,0 +1,95 @@
+---
+jobs:
+
+- name: just-promote-it
+  plan:
+  - get: manualtrigger
+    trigger: false
+
+- name: promote-loan-checker
+  public: false
+  serial: true
+  plan:
+  - get: manualtrigger
+    trigger: true
+    passed: [just-promote-it]
+  - get: source-code
+    trigger: false
+  - task: package-loan-checker
+    file: source-code/loan-approval-service/ci/tasks/build-loan-checker.yml
+  - put: push-to-prod
+    params:
+      manifest: source-code/loan-approval-service/prod-manifest.yml
+      path: package-output/loan-approval-service.jar
+    on_success:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` promoted --> ((loan-checker-prod-url)) to CloudyAzure.
+    on_failure:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` has *FAILED*, please check the logs.
+
+- name: smoke-prod-loan-checker
+  serial: true
+  public: false
+  plan:
+  - get: source-code
+    trigger: false
+    passed: [promote-loan-checker]
+  - get: push-to-prod
+    trigger: true
+    passed: [promote-loan-checker]
+  - task: smoke-prod-loan-checker
+    file: source-code/loan-approval-service/ci/tasks/smoke-test-loan-checker.yml
+    params:
+      URL: ((loan-checker-prod-url))
+    on_success:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` _passed_ :white_check_mark:
+    on_failure:
+      put: slack-alert
+      params:
+        text: |
+          `$BUILD_JOB_NAME` *FAILED* :x:
+
+resource_types:
+
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
+resources:
+
+- name: manualtrigger
+  type: time
+  source: {interval: 1m}
+
+- name: source-code
+  type: git
+  source:
+    uri: ((git-uri))
+    branch: master
+    private_key: ((git-private-key))
+
+- name: push-to-prod
+  type: cf
+  source:
+    api: ((cf-endpoint))
+    username: ((cf-user))
+    password: ((cf-password))
+    organization: ((cf-org))
+    space: ((cf-prod-space))
+    skip_cert_check: true
+
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: ((webhook))
+    insecure: true
