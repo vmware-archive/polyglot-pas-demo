@@ -8,7 +8,7 @@ import java.util.List;
 @Configuration
 @ConfigurationProperties(prefix = "approvals")
 @Validated
-public class LoansConfiguration {
+public class LocalLoansConfiguration {
 
   private List<String> naughtylist;
 
