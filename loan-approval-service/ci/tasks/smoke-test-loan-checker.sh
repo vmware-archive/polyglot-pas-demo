@@ -23,23 +23,32 @@ fi
 
 # Make sure the /actuator/info endpoint shows...
 export INFO_STATUS=`curl -sL -w %{http_code} "${URL}/actuator/info" -o /dev/null | grep "200"`
-if [ -z ${INFO_STATUS} ] || [ "${INFO_STATUS}" != "HTTP/1.1 200 OK" ]
+if [ -z ${INFO_STATUS} ] || [ "${INFO_STATUS}" != "200" ]
 then
-    echo "Actuator is showing /info correctly, status: ${INFO_STATUS}"
-else
-    echo -e "Error. Actuator is not showing '200 OK' on [$URL/actuator/info]"
+    echo -e "Error. Actuator is not showing '200' on [$URL/actuator/info] (${INFO_STATUS})"
     exit 1
+else
+    echo "Actuator is showing /info correctly, status: ${INFO_STATUS}"
 fi
 
 # Make sure the /actuator/env endpoint shows...
 export ENV_STATUS=`curl -sL -w %{http_code} "${URL}/actuator/info" -o /dev/null | grep "200"`
-# if curl -sL -w %{http_code} "$URL/actuator/env" -o /dev/null | grep "200"
-if [ -z ${ENV_STATUS} ] || [ "${ENV_STATUS}" != "HTTP/1.1 200 OK" ]
+if [ -z ${ENV_STATUS} ] || [ "${ENV_STATUS}" != "200" ]
 then
-    echo "Actuator is showing /env correctly, status: ${ENV_STATUS}"
-else
-    echo -e "Error. Actuator is not showing '200 OK' on [$URL/actuator/env]"
+    echo -e "Error. Actuator is not showing '200' on [$URL/actuator/env] (${ENV_STATUS})"
     exit 1
+else
+    echo "Actuator is showing /env correctly, status: ${ENV_STATUS}"
+fi
+
+# Make sure the /actuator/refresh endpoint is accepting posts...
+export REFRESH_STATUS=`curl -sL -w %{http_code} "${URL}/actuator/refresh" -d {} -H "Content-Type: application/json" -o /dev/null | grep "200"`
+if [ -z ${REFRESH_STATUS} ] || [ "${REFRESH_STATUS}" != "200" ]
+then
+    echo -e "Error. Actuator is not showing '200 OK' on [$URL/actuator/refresh] (${REFRESH_STATUS})"
+    exit 1
+else
+    echo "Actuator is accepting posts to /refresh correctly, status: ${REFRESH_STATUS}"
 fi
 
 # Test the Loan Checker API...
