@@ -4,9 +4,9 @@ namespace LoanApplication.Models
 {
 	public enum LoanStatus
 	{
-		Pending,
-		Approved,
-		Rejected,
-		Declined
+		PENDING,
+		APPROVED,
+		REJECTED,
+		DECLINED
 	}
 }
