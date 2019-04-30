@@ -91,10 +91,12 @@ namespace LoanApplication{
 				app.UseCloudFoundryActuators();
 				app.UseMetricsExporter();
 			}
-
+			
 			app.UseRefreshActuator();
 			app.UseTracingExporter();
 			app.UseMvc();
+
+			Models.InitializeContext.InitializeLoansAsync(app.ApplicationServices).Wait();
 
 			app.UseDiscoveryClient();
 		}

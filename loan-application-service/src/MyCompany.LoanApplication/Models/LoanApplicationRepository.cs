@@ -22,7 +22,7 @@ namespace LoanApplication.Models
 		}
 		public async Task<LoanApplicationEntity> GetAsync(Guid id)
 		{
-			var loan = await _db.Loans.FirstOrDefaultAsync(q => q.Id == id);
+			var loan = await _db.Loans.FirstAsync(q => q.Id.Equals(id));
 			return loan;
 		}
 		public async Task<List<LoanApplicationEntity>> ListAsync()
@@ -47,9 +47,10 @@ namespace LoanApplication.Models
 		public async void UpdateAsync(LoanApplication loanApp){
 			var loanAs = loanApp.AsLoanApplicationEntity();
 
-			var loan = await _db.Loans.FirstAsync(q => q.Id == loanAs.Id);
+			var loan = await GetAsync(loanAs.Id);
 
 			loan.LoanStatus = loanAs.LoanStatus;
+			
 			await _db.SaveChangesAsync();
 
 			return;

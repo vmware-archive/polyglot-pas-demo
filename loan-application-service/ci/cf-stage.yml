@@ -1,7 +1,7 @@
 ﻿---
 applications:
 - name: loan-application-service
-  host: loans
+  host: stage-loans
   instances: 1
   memory: 512M
   disk_quota: 512M

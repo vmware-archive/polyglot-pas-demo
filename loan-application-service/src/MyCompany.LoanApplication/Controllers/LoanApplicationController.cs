@@ -48,15 +48,20 @@ namespace LoanApplication.Controllers{
 		}
 		
 		// GET /<id>
-		[HttpGet("{id}")]
+		[HttpGet("{loanId}")]
 		public async Task<ActionResult<Models.LoanApplication>> Get(Guid loanId){
-			var loan = await _loans.GetAsync(loanId);
+			Models.LoanApplicationEntity loan = null;
 
-			if(loan != null){
-				return loan.AsLoanApplication();
+			try{
+				loan = await _loans.GetAsync(loanId);
+			}catch(ArgumentNullException){
+				return NoContent();
+			}catch(Exception ex){
+				_logger.LogError(ex, "General error retriving loan");
+				return StatusCode(StatusCodes.Status500InternalServerError);
 			}
 
-			return NoContent();
+			return loan.AsLoanApplication();
 		}
 		
 		// POST /apply
