@@ -2,6 +2,8 @@
 applications:
 - name: loan-checker
   path: target/loan-approval-service.jar
+  routes:
+    - route: loan-checker-prod.cloudy-azure.io
   services:
     - loans-config
     - loans-discovery
