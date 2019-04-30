@@ -6,4 +6,4 @@ applications:
     - loans-config
     - loans-discovery
   env:
-    SPRING_PROFILES_ACTIVE: test
+    SPRING_PROFILES_ACTIVE: prod

@@ -7,7 +7,8 @@ fly -t local execute --config ci/tasks/build-command-side.yml --input source-cod
 
 
 
-fly -t wings set-pipeline -p bw-polyglot-pas-demo -c ci/pipeline.yml -l ci/private.yml
+fly -t wings set-pipeline -p bw-polyglot-pas-test -c ci/test-pipeline.yml -l ci/private.yml
+fly -t wings set-pipeline -p bw-polyglot-pas-prod -c ci/prod-pipeline.yml -l ci/private.yml
 fly -t wings unpause-pipeline -p bw-polyglot-pas-demo
 fly -t wings expose-pipeline -p bw-polyglot-pas-demo
 fly -t wings containers
