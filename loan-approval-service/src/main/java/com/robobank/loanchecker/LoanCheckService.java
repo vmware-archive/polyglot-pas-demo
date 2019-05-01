@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RefreshScope
 @Service
 public class LoanCheckService {
 
@@ -22,7 +24,7 @@ public class LoanCheckService {
   private final Map<String, LoanApplication> rejectedLoans;
 
   @Autowired
-  public LoanCheckService(@Value("${max-loan-amount:100}") Long loanThreshold, LoansConfiguration loansConfiguration) {
+  public LoanCheckService(@Value("${loansConfiguration.max_loan_amount:100}") Long loanThreshold, LoansConfiguration loansConfiguration) {
     this.maxLoanAmount = loanThreshold;
     this.naughtyList = loansConfiguration.getNaughtyList();
 

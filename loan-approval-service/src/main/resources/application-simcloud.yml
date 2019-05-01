@@ -4,7 +4,8 @@ management:
       exposure:
         include: "*"
 
-max-loan-amount: 10000
+loansConfiguration:
+  max_loan_amount: 10000
 
 approvals:
   naughtylist:
