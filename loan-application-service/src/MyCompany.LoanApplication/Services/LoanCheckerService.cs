@@ -21,6 +21,8 @@ namespace LoanApplication.Services
 			_client = client;
 			_loanCheckerOptions = loanCheckerOptions;
 			_logger = logger;
+
+			_client.BaseAddress = new Uri(loanCheckerOptions.Value.Scheme + "://" + loanCheckerOptions.Value.Address);
 		}
 		public async Task<string> ServiceHealthCheck(){
 			HttpResponseMessage resp;

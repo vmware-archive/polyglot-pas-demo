@@ -18,7 +18,6 @@ namespace LoanApplication.Controllers{
 		private readonly ILogger<LoanApplicationController> _logger;
 		private Models.ILoanApplicationRepository _loans;
 		private Services.ILoanCheckerService _loanCheckerservice;
-		private Services.LoanCheckerOptions _loanCheckerOptions;
 		private IHostingEnvironment _env;
 
 		public LoanApplicationController(IOptions<CloudFoundryApplicationOptions> appOptions,
@@ -26,7 +25,6 @@ namespace LoanApplication.Controllers{
 											ILogger<LoanApplicationController> logger,
 											Models.ILoanApplicationRepository loans,
 											Services.ILoanCheckerService loanCheckerService,
-											IOptions<Services.LoanCheckerOptions> loanCheckerOptions,
 											IHostingEnvironment env)
 		{
 			_appOptions = appOptions.Value;
@@ -34,7 +32,6 @@ namespace LoanApplication.Controllers{
 			_logger = logger;
 			_loans = loans;
 			_loanCheckerservice = loanCheckerService;
-			_loanCheckerOptions = loanCheckerOptions.Value;
 			_env = env;
 		}
 
@@ -75,7 +72,13 @@ namespace LoanApplication.Controllers{
 				return BadRequest("Missing loan applicant name");
 
 			//Add the new entry to get id
-			var loan = _loans.Add(newApp);
+			Models.LoanApplicationEntity loan = null;
+			try{
+				loan = _loans.Add(newApp);
+			}catch(ArgumentOutOfRangeException){
+				_logger.LogInformation("Loan rejected due to amount > max allowed");
+				return BadRequest("Loan amount exceeds allowed limit");
+			}
 
 			if(_env.IsDevelopment())
 				return Models.LoanApplication.FromJson(loan.AsLoanApplication().AsJson());

@@ -50,18 +50,10 @@ namespace LoanApplication{
 			}
 
 			services.AddScoped<ILoanApplicationRepository, LoanApplicationRepository>();
+			services.Configure<Services.LoansConfigurationOptions>(Configuration.GetSection("loansConfiguration"));
 			services.Configure<Services.LoanCheckerOptions>(Configuration.GetSection("loanApprovalService"));
-			
-			var opt = new Services.LoanCheckerOptions() {
-				Address = Configuration["loanApprovalService:address"],
-				ApprovalCheckPath = Configuration["loanApprovalService:approvalCheckPath"],
-				Scheme = Configuration["loanApprovalService:scheme"],
-				ServiceHealthPath = Configuration["loanApprovalService:serviceHealthPath"]
-			};
 
-			services.AddHttpClient("loanApplications", c =>{
-				c.BaseAddress = new Uri(opt.Scheme + "://" + opt.Address);
-			})
+			services.AddHttpClient("loanApplications")
 			.AddHttpMessageHandler<DiscoveryHttpMessageHandler>()
 			.AddTypedClient<Services.ILoanCheckerService, Services.LoanCheckerService>();
 

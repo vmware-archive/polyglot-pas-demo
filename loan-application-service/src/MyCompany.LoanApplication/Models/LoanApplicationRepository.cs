@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace LoanApplication.Models
 {
@@ -11,11 +12,15 @@ namespace LoanApplication.Models
 	{
 		private LoanApplicationContext _db;
 		private readonly ILogger<LoanApplicationRepository> _logger;
+		private readonly IOptions<Services.LoansConfigurationOptions> _loansConfig;
 
-		public LoanApplicationRepository(LoanApplicationContext db,			ILogger<LoanApplicationRepository> logger)
+		public LoanApplicationRepository(LoanApplicationContext db,
+					ILogger<LoanApplicationRepository> logger,
+					IOptions<Services.LoansConfigurationOptions> loansConfig)
 		{
 			_db = db;
 			_logger = logger;
+			_loansConfig = loansConfig;
 		}
 
 		public IQueryable<LoanApplicationEntity> SearchByName(string fullName)
@@ -39,6 +44,10 @@ namespace LoanApplication.Models
 			return loan;
 		}
 		public async Task<LoanApplicationEntity> AddAsync(NewLoanApplication newLoanApp){
+			if(newLoanApp.amount > _loansConfig.Value.max_loan_amount){
+				throw new ArgumentOutOfRangeException("amount");
+			}
+
 			var createApp = new Models.LoanApplicationEntity(){
 				FullName = newLoanApp.name,
 				Amount = newLoanApp.amount,
@@ -51,6 +60,11 @@ namespace LoanApplication.Models
 			return createApp;
 		}
 		public LoanApplicationEntity Add(NewLoanApplication newLoanApp){
+			if(newLoanApp.amount > _loansConfig.Value.max_loan_amount){
+				_logger.LogInformation("Loan rejected due to amount > max");
+				throw new ArgumentOutOfRangeException("amount");
+			}
+
 			var createApp = new Models.LoanApplicationEntity(){
 				FullName = newLoanApp.name,
 				Amount = newLoanApp.amount,
