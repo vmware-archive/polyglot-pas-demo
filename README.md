@@ -21,10 +21,12 @@ The Spring Cloud Config Server we have used to externalise our configuration exp
 The `config-server.json` files (for example [this one][4]) can be used to tell the config server which Git repository you want to use as your config backing store. To create a config-server on Pivotal Application Server (or on [Pivotal Web Services][5]) you can use the services in the marketplace and commission your services using the `cf` command line client as follows...
 
 ```bash
-cf create-service p-config-server standard config -c config-server.json
+cf create-service p-config-server standard config -c config-server.json # May differ depending on your PAS environment
 ```
 
-> Don't forget to bind your services to your apps using `cf bind-service <app-name> <service-name>` after they have been created. These applications spell out their service requirements clearly in their YAML based manifests, [like this one][6].
+> Don't forget to bind your services to your apps using `cf bind-service <app-name> <service-name>` after they have been created. 
+ 
+The applications in this demo do spell out their service requirements clearly in their Cloud Foundry `manifest.yml` files, [like this one][6].
 
 You can sign up for Pivotal Web Services at [run.pivotal.io][5]. You can get free credit and it doesn't require a credit card. 
 
