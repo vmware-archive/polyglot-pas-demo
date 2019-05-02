@@ -12,5 +12,5 @@ You can explore the .Net code in the `loan-application-service` folder [here][1]
 
 You can explore the Java code in the `loan-approval-service` folder [here][2].
 
-[1]: [/loan-application-service]
-[2]: [/loan-approval-service]
+[1]: /loan-application-service
+[2]: /loan-approval-service
