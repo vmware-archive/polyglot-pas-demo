@@ -1,6 +1,6 @@
 # Polyglot PAS Demo
 
-This code shows how microservices built using .Net or Java can easily use and Spring Cloud Services to solve cloud related architectural challenges such as service discovery or externalised configuration.
+This code shows how microservices built using .Net or Java can easily use Spring Cloud Services to solve cloud related architectural challenges such as service discovery or externalised configuration on Pivotal Application Service (PAS).
 
 This repository is organised into two pieces, each containing an application. The .Net application is called "Loan Applications" and is contained within the `loan-application-service` folder. The Java application is called "Loan Checker" and is stored in the `loan-approval-service` folder.
 
