@@ -64,6 +64,12 @@ The documentation for Spring Cloud Services (registry and config server) can be 
 
 > **Note:** The applications in this demo spell out their service requirements (and the service-names expected) in their Cloud Foundry `manifest.yml` files ([like this one][6]). Use these predefined service names when you commission your services for a more enjoyable deployment experience.
 
+## The Finished Architecture
+
+Once you've set everything up, your polyglot PAS architecture should look something like this...
+
+![alt text](/images/after.png)
+
 We hope you enjoyed [the talk][5] and get something useful from this code sample. If you would like to contact us or give us feedback, you can find [David Dieruf][14] and [Ben Wilcock][15] on Twitter.
 
 [1]: /loan-application-service
@@ -82,5 +88,5 @@ We hope you enjoyed [the talk][5] and get something useful from this code sample
 [14]: https://twitter.com/DierufDavid
 [15]: https://twitter.com/benbravo73
 [16]: https://docs.pivotal.io/spring-cloud-services/2-0/common/index.html
-[17]: https://spring.io]
+[17]: https://spring.io
 [18]: https://12factor.net/config
