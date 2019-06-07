@@ -64,11 +64,13 @@ The documentation for Spring Cloud Services (registry and config server) can be 
 
 > **Note:** The applications in this demo spell out their service requirements (and the service-names expected) in their Cloud Foundry `manifest.yml` files ([like this one][6]). Use these predefined service names when you commission your services for a more enjoyable deployment experience.
 
-## The Finished Architecture
+## The Finished Article
 
 Once you've set everything up, your polyglot PAS architecture should look something like this...
 
 ![alt text](/images/after.png)
+
+## How to get in touch
 
 We hope you enjoyed [the talk][5] and get something useful from this code sample. If you would like to contact us or give us feedback, you can find [David Dieruf][14] and [Ben Wilcock][15] on Twitter.
 
