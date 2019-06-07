@@ -1,0 +1,20 @@
+security:
+  basic:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+  cloudfoundry:
+    enabled: true
+    skip-ssl-validation: true
+
+spring:
+  thymeleaf:
+    cache: false
+
+debug: false
+
+your:
+  host:
+    is: Pivotal

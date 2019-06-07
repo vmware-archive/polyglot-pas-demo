@@ -1,0 +1,11 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+approvals:
+  naughtylist:
+    - trunp
+    - mhay
+    - unn

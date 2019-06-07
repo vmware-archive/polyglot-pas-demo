@@ -1,0 +1,51 @@
+Logging: 
+  IncludeScopes: false
+  Debug:
+    LogLevel: 
+      Default: Information
+  Console:
+    DisableColors: true
+    LogLevel: 
+      Default: Information
+security:
+  oauth2:
+    client:
+      validateCertificates: false    
+management: 
+  endpoints: 
+    enabled: true
+    path: /cloudfoundryapplication
+    cloudfoundry: 
+      validateCertificates: false
+    actuator:
+      exposure:
+        include: ["*"]
+  metrics:
+    exporter:
+      cloudfoundry:
+        validateCertificates: false
+  tracing:
+    alwaysSample: true
+    egressIgnorePattern: /api/v2/spans|/v2/apps/.*/permissions|/eureka/.*|/oauth/.*
+    useShortTraceIds: true
+    exporter:
+      zipkin:
+        endpoint: https://stage-zipkin-server.cloudyazure.io/api/v2/spans
+        validateCertificates: false
+        useShortTraceIds: true
+eureka:
+  client: 
+    #shouldFetchRegistry: false
+    serviceUrl: http://localhost:8761/eureka/
+    shouldRegisterWithEureka: false
+    validateCertificates: false
+  instance:
+    port: 5000
+hystrix:
+  stream:
+    validate_certificates: false
+loanApprovalService:
+  scheme: http
+  address: LOAN-CHECKER
+  approvalCheckPath: check
+  serviceHealthPath: actuator/health
