@@ -18,9 +18,11 @@ In this code we offer technical guidance on how to...
 
 This code is intended for use with [Pivotal Application Service (PAS)][7] with both the [Spring Cloud Services broker][10] and the [Azure Services broker][8] installed. 
 
-> You can try [PAS for free for 90 days on Azure][9].
-
 > **Pivotal Application Service:** [PAS][7] is a truly polyglot IaaS abstraction layer for both Windows and Linux based applications. it offers a uniquely unified developer experience so that programmers working in many different languages can get their apps into production fast.
+
+> ![Pivotal Application Service (PAS) - fits this usecase exactly](/images/pas.png)
+
+> You can try [PAS for free for 90 days on Azure][9].
 
 ## Understanding the code layout
 
@@ -68,7 +70,7 @@ The documentation for Spring Cloud Services (registry and config server) can be 
 
 Once you've set everything up, your polyglot PAS architecture should look something like this...
 
-![alt text](/images/after.png)
+!["After" Architecture Diagram showing both applications, and their services, all running on Pivotal Application Service (PAS) ](/images/after.png)
 
 ## How to get in touch
 
